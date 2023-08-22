@@ -13,28 +13,17 @@ class Solution
   public:
     //Function to check if a string is Pangram or not.
     bool checkPangram (string &str) {
-        vector<bool>mark(26,false);// declare a bool mark and marked it as false
-        
-        for(int i = 0;i<str.size();i++)
-        {
-            // upperCase
-            int index = 0;
-            if(str[i]>='A' && str[i]<='Z'){
-                 index = str[i]-'A';
+        set<char>s;
+        for(auto ch : str){
+            if(ch>='a' && ch<='z'){
+                s.insert(ch);
+            } 
+            if(ch>='A' && ch<='Z'){
+                ch = tolower(ch);
+                s.insert(ch);
             }
-            else if(str[i]>='a' && str[i]<='z'){ // lowerCase
-                 index = str[i]-'a';
-            }
-            else
-            {
-                continue;
-            }
-            mark[index] = true;
         }
-        for(int i=0;i<26;i++){
-            if(mark[i]==false) return false;
-        }
-        return true;
+        return s.size()==26;
     }
 
 };
