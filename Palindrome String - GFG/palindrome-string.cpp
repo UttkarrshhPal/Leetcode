@@ -15,7 +15,7 @@ public:
 	    // Using Two Pointer Approach
 	    int l = 0;
 	    int r = S.size()-1;
-	    while(l<r){
+	    while(l<=r){
 	        if(S[l]!=S[r]) return 0;
 	        l++;
 	        r--;
