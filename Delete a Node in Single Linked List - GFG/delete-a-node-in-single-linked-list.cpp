@@ -82,46 +82,50 @@ struct Node
     }
 };
 */
-
-/*You are required to complete below method*/
-
- // delete at head
+// delete at head
 void delete_at_head(Node *&head){
-        Node *to_delete = head;
-        head = head->next;
-        delete(to_delete);
+    Node *to_delete = head;
+    head = head->next;
+    
+    if(head == NULL){
+        delete(to_delete); 
     }
     
- // delete at tail    
+}
 void delete_at_tail(Node *&head){
-        Node *temp = head;
-        while(temp->next!=NULL){
-            temp = temp->next;
-        }
-        temp->next = NULL;
+    Node *temp = head;
+    // we will till second last node 
+    while(temp->next!=NULL){
+        temp = temp->next;
     }
-    
+    // and point to last node to NULL
+    temp->next = NULL;
+}
+/*You are required to complete below method*/
 Node* deleteNode(Node *head,int x)
 {
-   Node *temp = head;
-   if(head == NULL) return head;
+    // check if Linked list Exists
+    if(head == NULL) return NULL;
    
-   if(x==1){
-       delete_at_head(head);
-       return head;
-   }
-   int count = 2;
-   while(count<x){
-       temp = temp->next;
-       // Edge Case
-       if(temp->next==NULL){
-           delete_at_tail(head);
-           return head;
-       }
-       count++;
-   }
-   Node *to_delete = temp->next;
-   temp->next = temp->next->next;
-   delete(to_delete);
-   return head;
+    
+    if(x==1){
+        delete_at_head(head);
+        return head;
+    }
+    Node *temp = head;
+    int cnt = 2;
+    while(cnt<x){
+        temp = temp->next;
+        // if temp-<next become NULL------->EDGE CASE
+        if(temp->next==NULL){
+            delete_at_tail(head);
+            return head;
+        }
+        cnt++;
+    }
+    Node *to_delete = temp->next;
+    temp->next = temp->next->next;
+    delete(to_delete);
+    return head;
 }
+
